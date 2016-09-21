@@ -18,13 +18,14 @@ post '/visit' do
 	@username = params[:username]
 	@phone    = params[:phone]
 	@datetime = params[:datetime]
+	@master = params[:master]
 
 	@title = 'Thank you!'
 	if @username != nil
-		@message = "Dear #{@username}, we'll be waiting for you at #{@datetime}"	
+		@message = "Dear #{@username}, we'll be waiting for you at #{@datetime} to master #{@master}"	
 
 		f = File.open './public/users.txt', 'a'
-		f.write("User: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}")
+		f.write("User: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}, master #{@master}")
 		f.write("\r\n")
 		f.close
 
