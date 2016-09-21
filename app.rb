@@ -13,3 +13,43 @@ end
 get '/visit' do
 	erb :visit
 end
+
+post '/visit' do
+	@username = params[:username]
+	@phone    = params[:phone]
+	@datetime = params[:datetime]
+
+	@title = 'Thank you!'
+	if @username != nil
+		@message = "Dear #{@username}, we'll be waiting for you at #{@datetime}"	
+
+		f = File.open './public/users.txt', 'a'
+		f.write("User: #{@username}, Phone: #{@phone}, Date and time: #{@datetime}")
+		f.write("\r\n")
+		f.close
+
+   		erb :message
+	end
+end
+
+get '/contacts' do
+	erb :contacts
+end
+
+post '/contacts' do
+	@email   = params[:email]
+	@message = params[:message]
+
+	@title = 'Thank you! Thank you!'
+	if @email != nil
+		@message = "For #{@email}, message '#{@message}'"	
+
+		f = File.open './public/contacts.txt', 'a'
+		f.write("For email: #{@email}, message: '#{@message}'")
+		f.write("\r\n")
+		f.close
+
+   		erb :message
+	end
+end
+
